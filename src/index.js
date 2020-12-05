@@ -58,7 +58,14 @@ app.post('/:operation' , (req,res)=>{
     const body = req.body;
     const oprt = req.params.operation;
 
-    const num1= Number(body.num1) , num2=Number(body.num2);
+    const num1= body.num1 , num2=body.num2 ; 
+    if(typeof num1==String || typeof num2==String){
+        res.send({
+            status: "error" , 
+            message: "Invalid data types"
+        })
+    }
+
     // console.log(body);
     
         let toSend=perform(num1 , num2 , oprt);
