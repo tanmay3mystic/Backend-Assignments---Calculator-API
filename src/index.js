@@ -17,39 +17,60 @@ app.get("/" , (req,res)=>{
 });
 
 const perform = (num1 , num2 , oprt)=>{
-    let stat , res=null , msg="";
-    if(num1<-1000000 || num2<-1000000) {stat="error";msg="Underflow";}
+    let stat={} ; 
+    if(num1<-1000000 || num2<-1000000) {stat =  {
+        status: "error" , 
+        message:"Underflow",
+        }}
     else
-    if(num1>1000000 || num2>1000000){stat="error" ; msg = "Overflow";}
+    if(num1>1000000 || num2>1000000){stat =  {
+        status: "error" , 
+        message:"Overflow",
+        }}
     else{
         switch(oprt) {
-            case "add" : stat="success";
-                    msg= "the sum of given two numbers";
-                    res=num1+num2;
+            case "add" :stat =  {
+                status: "success" , 
+                message:"the sum of given two numbers",
+                result: num1+num2
+                }
                     break;
-            case "sub" : stat="success";
-                msg= "the difference of given two numbers";
-                res=num1-num2;
+            case "sub" : stat =  {
+                status: "success" , 
+                message:"the difference of given two numbers",
+                result: num1-num2
+                }
                 break;
-            case "multiply" :stat="success";
-                    msg= "The product of given numbers";
-                    res=num1*num2;
+            case "multiply" :stat =  {
+                            status: "success" , 
+                            message:"The product of given numbers",
+                            result: num1*num2
+                            }
                     break;
-            case "divide" : stat=num2===0?"error":"success";
-                msg= num2===0? "Cannot divide by zero":"The product of given numbers";
-                res=num2!=0?num1/num2:null;
+            case "divide" : if(num2!=0){
+               stat =  {status: "success" , 
+                message:"Cannot divide by zero",
+                result: num1/num2
+                  }
+            }
+            else stat={
+                status: "error" , 
+                message:"The division of given numbers",
+            }
                 break;
-            default : res=null;
+            
         }
      }
-    if(res<-1000000) {stat="error";msg="Underflow";}
-    else if (res>1000000) {stat="error" ; msg = "Overflow";}
+    if(res<-1000000) {stat =  {
+        status: "error" , 
+        message:"Underflow",
+        }}
+    else if (res>1000000) {stat =  {
+        status: "error" , 
+        message:"Overflow",
+        }}
 
-    return {
-        status:stat , 
-        message:msg,
-        result: res
-    }
+    return stat ; 
 
 
 }
@@ -59,7 +80,7 @@ app.post('/:operation' , (req,res)=>{
     const oprt = req.params.operation;
 
     const num1= body.num1 , num2=body.num2 ; 
-    if(typeof num1=="string" || typeof num2=="string"){
+    if(typeof num1=="string" || typeof num2==string){
         res.send({
             status: "error" , 
             message: "Invalid data types"
