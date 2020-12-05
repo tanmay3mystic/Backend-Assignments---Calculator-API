@@ -31,31 +31,31 @@ const perform = (num1 , num2 , oprt)=>{
         switch(oprt) {
             case "add" :stat =  {
                 status: "success" , 
-                message:"the sum of given two numbers",
-                result: num1+num2
+                message: "the sum of given two numbers",
+                sum: num1+num2
                 }
                     break;
             case "sub" : stat =  {
                 status: "success" , 
-                message:"the difference of given two numbers",
-                result: num1-num2
+                message: "the difference of given two numbers",
+                difference: num1-num2
                 }
                 break;
             case "multiply" :stat =  {
                             status: "success" , 
-                            message:"The product of given numbers",
+                            message: "The product of given numbers",
                             result: num1*num2
                             }
                     break;
             case "divide" : if(num2!=0){
                stat =  {status: "success" , 
-                message:"Cannot divide by zero",
+                message: "Cannot divide by zero",
                 result: num1/num2
                   }
             }
             else stat={
                 status: "error" , 
-                message:"The division of given numbers",
+                message: "The division of given numbers",
             }
                 break;
             
@@ -63,11 +63,11 @@ const perform = (num1 , num2 , oprt)=>{
      }
     if(res<-1000000) {stat =  {
         status: "error" , 
-        message:"Underflow",
+        message: "Underflow",
         }}
     else if (res>1000000) {stat =  {
         status: "error" , 
-        message:"Overflow",
+        message: "Overflow",
         }}
 
     return stat ; 
