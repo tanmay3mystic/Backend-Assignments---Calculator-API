@@ -20,12 +20,12 @@ const perform = (num1 , num2 , oprt)=>{
     let stat={} ; 
     if(num1<-1000000 || num2<-1000000) {stat =  {
         status: "error" , 
-        message:"Underflow",
+        message: "Underflow",
         }}
     else
     if(num1>1000000 || num2>1000000){stat =  {
         status: "error" , 
-        message:"Overflow",
+        message: "Overflow",
         }}
     else{
         switch(oprt) {
@@ -49,13 +49,13 @@ const perform = (num1 , num2 , oprt)=>{
                     break;
             case "divide" : if(num2!=0){
                stat =  {status: "success" , 
-                message: "Cannot divide by zero",
+                message: "The division of given numbers",
                 result: num1/num2
                   }
             }
             else stat={
                 status: "error" , 
-                message: "The division of given numbers",
+                message: "Cannot divide by zero",
             }
                 break;
             
