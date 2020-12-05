@@ -17,7 +17,7 @@ app.get("/" , (req,res)=>{
 });
 
 const perform = (num1 , num2 , oprt)=>{
-    let stat={} ; 
+    let stat={} ;
     if(num1<-1000000 || num2<-1000000) {stat =  {
         status: "error" , 
         message: "Underflow",
@@ -34,24 +34,58 @@ const perform = (num1 , num2 , oprt)=>{
                 message: "the sum of given two numbers",
                 sum: num1+num2
                 }
+                if(stat.sum<-1000000) {stat =  {
+                    status: "error" , 
+                    message: "Underflow",
+                    }}
+                    else if (stat.sum>1000000) {stat =  {
+                        status: "error" , 
+                        message: "Overflow",
+                        }}
+
                     break;
             case "sub" : stat =  {
                 status: "success" , 
                 message: "the difference of given two numbers",
                 difference: num1-num2
                 }
+                if(stat.difference<-1000000) {stat =  {
+                    status: "error" , 
+                    message: "Underflow",
+                    }}
+                    else if (stat.difference>1000000) {stat =  {
+                        status: "error" , 
+                        message: "Overflow",
+                        }}
+
                 break;
             case "multiply" :stat =  {
                             status: "success" , 
                             message: "The product of given numbers",
                             result: num1*num2
                             }
+                            if(stat.result<-1000000) {stat =  {
+                                status: "error" , 
+                                message: "Underflow",
+                                }}
+                                else if (stat.result>1000000) {stat =  {
+                                    status: "error" , 
+                                    message: "Overflow",
+                                    }}
                     break;
             case "divide" : if(num2!=0){
                stat =  {status: "success" , 
                 message: "The division of given numbers",
                 result: num1/num2
                   }
+                  if(stat.result<-1000000) {stat =  {
+                    status: "error" , 
+                    message: "Underflow",
+                    }}
+                    else if (stat.result>1000000) {stat =  {
+                        status: "error" , 
+                        message: "Overflow",
+                        }}
             }
             else stat={
                 status: "error" , 
@@ -61,14 +95,7 @@ const perform = (num1 , num2 , oprt)=>{
             
         }
      }
-    if(res<-1000000) {stat =  {
-        status: "error" , 
-        message: "Underflow",
-        }}
-    else if (res>1000000) {stat =  {
-        status: "error" , 
-        message: "Overflow",
-        }}
+   
 
     return stat ; 
 
@@ -80,7 +107,8 @@ app.post('/:operation' , (req,res)=>{
     const oprt = req.params.operation;
 
     const num1= body.num1 , num2=body.num2 ; 
-    if(typeof num1=="string" || typeof num2==string){
+    console.log(typeof num1);
+    if(typeof num1==="string" || typeof num2==="string"){
         res.send({
             status: "error" , 
             message: "Invalid data types"
@@ -89,7 +117,7 @@ app.post('/:operation' , (req,res)=>{
 
     // console.log(body);
     
-        let toSend=perform(num1 , num2 , oprt);
+        let toSend=perform(Number(num1) , Number(num2) , oprt);
         res.send(toSend);
 })
 
