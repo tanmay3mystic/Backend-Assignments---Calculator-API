@@ -59,7 +59,7 @@ app.post('/:operation' , (req,res)=>{
     const oprt = req.params.operation;
 
     const num1= body.num1 , num2=body.num2 ; 
-    if(typeof num1==String || typeof num2==String){
+    if(typeof num1=="string" || typeof num2=="string"){
         res.send({
             status: "error" , 
             message: "Invalid data types"
